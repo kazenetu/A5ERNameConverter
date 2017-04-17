@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>A5ER Name Converter</title>
+</head>
+<body>
+    <div>
+    <h1>A5ER テーブル・カラムを大文字・小文字化するツール</h1>
+    </div>
+
+    <div>
+      <h2>
+        A5ERファイルの中身(テキストファイル)をコピペしてください。
+      </h2>
+    </div>
+
+    <div>
+    <textarea id="before" rows="10" cols="80"></textarea>
+  </div>
+
+    <div>
+      <input type="checkbox" id="lower">
+      <lable for="lower">小文字</label>
+      <button id="convert">変換</button>
+    </div>
+
+    <div>
+    生成結果
+    </div>
+
+    <textarea id="after" rows="20" cols="80"></textarea>
+
+    <script>
+    window.onload = function () {
+
+      // 変更ボタンクリック イベント
+      var button = document.getElementById('convert');
+      button.onclick = function () {
+        var beforeText = document.getElementById('before').value;
+        if(beforeText === ''){
+            return;
+        }
+
+        var src = beforeText.split("\n");
+        var desc = new Array();
+        var isConvertLower = false;
+        if(document.getElementById('lower').checked) {
+          isConvertLower = true;
+        }
+
+        for (var lineIndex = 0; lineIndex < src.length; lineIndex++) {
+            var line = src[lineIndex];
+
+            var isProcessed = false;
+            var columnIndex = -1;
+            var name = '';
+            var column = 'PName=';
+            if((columnIndex = line.indexOf(column)) >= 0) {
+                name = line.substr(columnIndex + column.length);
+                desc.push(line.replace(name, convert(isConvertLower,name) ));
+                isProcessed = true;
+            }
+
+            column = 'Field=';
+            if((columnIndex = line.indexOf(column)) >= 0) {
+                name = line.substr(columnIndex + column.length);
+                fileds = name.split(',');
+                desc.push(line.replace(','+fileds[1], convert(isConvertLower,','+fileds[1]) ));
+                isProcessed = true;
+            }
+
+            if(!isProcessed){
+              desc.push(line);
+            }
+            desc.push('\n');
+        }
+
+        var after = document.getElementById('after');
+        after.value = desc.join("");
+      };
+    };
+    function convert(isConvertLower, src) {
+        if(isConvertLower) {
+          return src.toLowerCase()
+        }
+        return src.toUpperCase()
+    }
+    </script>
+</body>
+</html>
