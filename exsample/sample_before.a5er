@@ -37,22 +37,59 @@ SqlSeparator=0
 ShowTag=1
 ShowCommonAttributes=0
 
+[Relation]
+Entity1=T_ARCHIVE
+Entity2=T_FILE
+RelationType1=2
+RelationType2=3
+Fields1=ARC_ID
+Fields2=ARC_ID
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,2195,7805,1551,R,R
+Dependence=1
+Caption=
+PName=
+LineMode=0
+Bar1=220
+Bar2=780
+Bar3=155
+TermPos1=R
+TermPos2=R
+
+[Entity]
+PName=T_ARCHIVE
+LName=アーカイブファイル
+Comment=
+TableOption=
+Page=MAIN
+Left=50
+Top=300
+Field="アーカイブID","ARC_ID","@INT","NOT NULL",0,"","",$FFFFFFFF,""
+Field="アーカイブファイル名","ARC_FILE_NAME","",,,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20170417215905
+Position="MAIN",50,300,257,267
+
 [Entity]
 PName=T_FILE
 LName=ファイルテーブル
 Comment=
 TableOption=
-Page=Main
-Left=300
-Top=600
-Field="ID","ID","@INT","NOT NULL",0,"","",$FFFFFFFF,""
-Field="BASE64ファイルデータ","IMAGE_DATA","@VARCHAR(1000000)",,,"","",$FFFFFFFF,""
-Field="ファイル名","FILE_NAME","@VARCHAR(50)",,,"","",$FFFFFFFF,""
+Page=MAIN
+Left=500
+Top=350
+Field="アーカイブID","ARC_ID","@INT","NOT NULL",0,"","アーカイブID",$FFFFFFFF,""
+Field="ファイルNO","FILE_NO","@INT","NOT NULL",1,"","アーカイブ内No",$FFFFFFFF,""
+Field="BASE64ファイルデータ","IMAGE_DATA","@VARCHAR(1000000)",,,"\q\q","ファイルデータ",$FFFFFFFF,""
+Field="ファイル名","FILE_NAME","@VARCHAR(50)",,,"\q\q","ファイル名",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20170401185307
-Position="Main",300,600,262,527
+ModifiedDateTime=20170417215926
+Position="MAIN",500,350,262,527
 
 [Entity]
 PName=MT_MSG
@@ -60,8 +97,8 @@ LName=メッセージマスタ
 Comment=
 TableOption=
 Page=MAIN
-Left=650
-Top=300
+Left=900
+Top=100
 Field="メッセージ種類","MESSAGE_KIND","@VARCHAR(1)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="メッセージID","MESSAGE_ID","@INT","NOT NULL",1,"","",$FFFFFFFF,""
 Field="メッセージ","MESSAGE","@VARCHAR(50)",,,"","",$FFFFFFFF,""
@@ -69,7 +106,7 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20170330071702
-Position="MAIN",650,300,302,352
+Position="MAIN",900,100,302,352
 
 [Entity]
 PName=T_TEST

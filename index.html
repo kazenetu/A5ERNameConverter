@@ -56,19 +56,34 @@
             var isProcessed = false;
             var columnIndex = -1;
             var name = '';
-            var column = 'PName=';
+            var column = '';
+
+            // テーブル名
+            column ='PName=';
             if((columnIndex = line.indexOf(column)) >= 0) {
                 name = line.substr(columnIndex + column.length);
                 desc.push(line.replace(name, convert(isConvertLower,name) ));
                 isProcessed = true;
             }
 
+            // カラム名
             column = 'Field=';
             if((columnIndex = line.indexOf(column)) >= 0) {
                 name = line.substr(columnIndex + column.length);
                 fileds = name.split(',');
                 desc.push(line.replace(','+fileds[1], convert(isConvertLower,','+fileds[1]) ));
                 isProcessed = true;
+            }
+
+            // リレーション情報
+            var relationColumns = ['Entity1=','Entity2=','Fields1=','Fields2='];
+            for(var relationColumnIndex=0;!isProcessed && relationColumnIndex < relationColumns.length;relationColumnIndex++){
+              var column = relationColumns[relationColumnIndex];
+              if((columnIndex = line.indexOf(column)) >= 0) {
+                  name = line.substr(columnIndex + column.length);
+                  desc.push(line.replace(name, convert(isConvertLower,name) ));
+                  isProcessed = true;
+              }
             }
 
             if(!isProcessed){
