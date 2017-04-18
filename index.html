@@ -86,6 +86,14 @@
               }
             }
 
+            // インデックス情報
+            column ='Index==';
+            if((columnIndex = line.indexOf(column)) >= 0) {
+                name = line.substr(columnIndex + column.length);
+                desc.push(line.replace(name, convert(isConvertLower,name) ));
+                isProcessed = true;
+            }
+
             if(!isProcessed){
               desc.push(line);
             }
