@@ -85,10 +85,12 @@ Field="アーカイブID","arc_id","@INT","NOT NULL",0,"","アーカイブID",$F
 Field="ファイルNO","file_no","@INT","NOT NULL",1,"","アーカイブ内No",$FFFFFFFF,""
 Field="BASE64ファイルデータ","image_data","@VARCHAR(1000000)",,,"\q\q","ファイルデータ",$FFFFFFFF,""
 Field="ファイル名","file_name","@VARCHAR(50)",,,"\q\q","ファイル名",$FFFFFFFF,""
+Index==1,file_no,file_name
+Index==2,arc_id,file_no
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20170417215926
+ModifiedDateTime=20170418185401
 Position="MAIN",500,350,262,527
 
 [Entity]
